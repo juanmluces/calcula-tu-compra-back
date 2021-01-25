@@ -25,4 +25,31 @@ GET http://localhost:3000/products/categories/3
 
 
 ### 
-GET http://localhost:3000/products/
+GET http://localhost:3000/products/page/1
+
+### 
+GET http://localhost:3000/products/search/hacendado/page/1
+
+### 
+GET http://localhost:3000/products/categoryid/1/page/1
+
+###
+POST http://localhost:3000/lists/create
+Content-Type: application/json
+Authorization: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjUsImV4cGlyZSI6MTYxMTU5OTQ5OSwiaWF0IjoxNjExNTk4ODk5fQ.D_d68Dt3oISdq3O03KYH4Qfmfd084URzjNBgbIqPGl8"
+
+{
+  "title": "juans list",
+  "userid": "5",
+  "products": [1,1,1,1,1,1,3,5,5,5]
+}
+
+
+###
+POST http://localhost:3000/lists/last
+Content-Type: application/json
+Authorization: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjUsImV4cGlyZSI6MTYxMTYwMDEyMSwiaWF0IjoxNjExNTk5NTIxfQ.4Ma1xko6BGa5_Oo_LTmFdXzycF2Bd1un0CZeY18NPFc"
+
+{
+   "userid": "5"
+}
