@@ -1,4 +1,4 @@
-const { createFavoriteList, removeFavoriteList, getListsByNameSearch, getListsInDates } = require('../models/lists');
+const { createFavoriteList, removeFavoriteList, getListsByNameSearch, getListsInDates, getListsIdOfMonth } = require('../models/lists');
 const { getUserById, changeUserAvatar } = require('../models/users');
 const { getAllProductsOfList } = require('../models/products')
 
@@ -82,6 +82,34 @@ router.post('/listdaterange', async (req, res) => {
     res.json(lists)
   } catch (error) {
     res.json({ error: error.message });
+  }
+})
+
+router.post('/stats', async (req, res) => {
+  const userId = req.body.userid;
+  const monthExpenses = []
+  try {
+    const months = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
+    const yearListsIds = []
+    for (month of months) {
+      const listIds = await getListsIdOfMonth(month, userId);
+      const idsOfMonth = []
+      listIds.forEach(list => idsOfMonth.push(list.id))
+      yearListsIds.push(idsOfMonth)
+    }
+    for (idsOfMonth of yearListsIds) {
+      let total = 0;
+      for (id of idsOfMonth) {
+        const allProducts = await getAllProductsOfList(id);
+        for (product of allProducts) {
+          total += product.precio;
+        }
+      }
+      monthExpenses.push(Math.round(total));
+    }
+    res.json(monthExpenses)
+  } catch (error) {
+    res.json({ error: error.message })
   }
 })
 

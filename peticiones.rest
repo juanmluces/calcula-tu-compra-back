@@ -126,3 +126,24 @@ Authorization: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjUsImV4cGlyZSI
 }
 
 
+###
+POST  http://localhost:3000/profile/listdaterange
+Content-Type: application/json
+Authorization: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjUsImV4cGlyZSI6MTYxMjU1MDk3MiwiaWF0IjoxNjExNjg2OTcyfQ.L9HmDuqUn2rFbwyKXjTmKqW4Eu5mRYwe1VeROVPm2xM"
+
+{
+  "userid": "5",
+  "dateFrom": "2021/01/01",
+  "dateTo": "2021/01/26"
+}
+
+###
+POST  http://localhost:3000/profile/stats
+Content-Type: application/json
+Authorization: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjUsImV4cGlyZSI6MTYxMjU1MDk3MiwiaWF0IjoxNjExNjg2OTcyfQ.L9HmDuqUn2rFbwyKXjTmKqW4Eu5mRYwe1VeROVPm2xM"
+
+{
+  "userid": "5"
+}
+
+

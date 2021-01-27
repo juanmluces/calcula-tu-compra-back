@@ -79,4 +79,13 @@ const getListsInDates = (pUserId, pDateFrom, pDateTo) => {
   })
 }
 
-module.exports = { getListsInDates, getListsByNameSearch, createNewList, getLastList, getFavoriteList, createFavoriteList, removeFavoriteList }
+const getListsIdOfMonth = (pMonth, pUserId) => {
+  return new Promise((resolve, reject) => {
+    db.query('SELECT id FROM lists where fk_user = ? AND month(lists.fecha) = ?', [pUserId, pMonth], (error, rows) => {
+      if (error) { reject(error); }
+      resolve(rows)
+    })
+  })
+}
+
+module.exports = { getListsIdOfMonth, getListsInDates, getListsByNameSearch, createNewList, getLastList, getFavoriteList, createFavoriteList, removeFavoriteList }
