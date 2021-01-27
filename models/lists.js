@@ -69,4 +69,14 @@ const getListsByNameSearch = (userId, searchInput) => {
   })
 }
 
-module.exports = { getListsByNameSearch, createNewList, getLastList, getFavoriteList, createFavoriteList, removeFavoriteList }
+const getListsInDates = (pUserId, pDateFrom, pDateTo) => {
+  return new Promise((resolve, reject) => {
+    db.query('SELECT * FROM lists WHERE fk_user = ? AND fecha BETWEEN ? AND ?', [pUserId, pDateFrom, pDateTo], (error, rows) => {
+      if (error) reject(error)
+      if (rows.length === 0) resolve(null);
+      resolve(rows)
+    })
+  })
+}
+
+module.exports = { getListsInDates, getListsByNameSearch, createNewList, getLastList, getFavoriteList, createFavoriteList, removeFavoriteList }

@@ -1,4 +1,4 @@
-const { createFavoriteList, removeFavoriteList, getListsByNameSearch } = require('../models/lists');
+const { createFavoriteList, removeFavoriteList, getListsByNameSearch, getListsInDates } = require('../models/lists');
 const { getUserById, changeUserAvatar } = require('../models/users');
 const { getAllProductsOfList } = require('../models/products')
 
@@ -72,6 +72,16 @@ router.post('/getsearchedlist', async (req, res) => {
     res.json(products)
   } catch (error) {
     res.json({ error: error.message })
+  }
+})
+
+router.post('/listdaterange', async (req, res) => {
+  const { userid, dateFrom, dateTo } = req.body;
+  try {
+    const lists = await getListsInDates(userid, dateFrom, dateTo);
+    res.json(lists)
+  } catch (error) {
+    res.json({ error: error.message });
   }
 })
 
