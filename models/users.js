@@ -28,7 +28,16 @@ const createUser = (pUser) => {
   })
 }
 
+const changeUserAvatar = (pUserId, pAvatarUrl) => {
+  return new Promise((resolve, reject) => {
+    db.query('UPDATE users SET avatar = ? WHERE id = ?', [pAvatarUrl, pUserId], (err, result) => {
+      if (err) reject(err);
+      resolve(result)
+    })
+  })
+}
 
 
 
-module.exports = { getUserByUsername, createUser, getUserById }
+
+module.exports = { getUserByUsername, createUser, getUserById, changeUserAvatar }

@@ -48,8 +48,81 @@ Authorization: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjUsImV4cGlyZSI
 ###
 POST http://localhost:3000/lists/last
 Content-Type: application/json
-Authorization: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjUsImV4cGlyZSI6MTYxMTYwMDEyMSwiaWF0IjoxNjExNTk5NTIxfQ.4Ma1xko6BGa5_Oo_LTmFdXzycF2Bd1un0CZeY18NPFc"
+Authorization:"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjUsImV4cGlyZSI6MTYxMjU0MTYyNywiaWF0IjoxNjExNjc3NjI3fQ.Q9HlDxvd8EOmxQ7xRrV7XGvg7DDfmJpLgha0IHsoVl0"
 
 {
    "userid": "5"
 }
+
+###
+POST  http://localhost:3000/lists/favorite
+Content-Type: application/json
+Authorization: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjUsImV4cGlyZSI6MTYxMjU0MTYyNywiaWF0IjoxNjExNjc3NjI3fQ.Q9HlDxvd8EOmxQ7xRrV7XGvg7DDfmJpLgha0IHsoVl0"
+
+{
+  "userid": "5"
+}
+
+###
+POST http://localhost:3000/profile/
+Content-Type: application/json
+Authorization: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjUsImV4cGlyZSI6MTYxMTY4NjgxNiwiaWF0IjoxNjExNjg2MjE2fQ.h0-oI9I08Ob7fn306lUBP1oz9rzgGGmNY3gynF_1Ttg"
+
+{
+  "userid": "5"
+}
+
+
+###
+POST http://localhost:3000/profile/avatar
+Content-Type:  application/json
+Authorization: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjUsImV4cGlyZSI6MTYxMTY4NjgxNiwiaWF0IjoxNjExNjg2MjE2fQ.h0-oI9I08Ob7fn306lUBP1oz9rzgGGmNY3gynF_1Ttg"
+
+{
+  "userid": "5",
+  "avatarUrl": "https://i.pinimg.com/originals/b0/45/9a/b0459ad3f7c2159032f24da9e40a9ec9.jpg"
+}
+
+
+###
+POST  http://localhost:3000/profile/newfavorite
+Content-Type: application/json
+Authorization: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjUsImV4cGlyZSI6MTYxMjU1MDk3MiwiaWF0IjoxNjExNjg2OTcyfQ.L9HmDuqUn2rFbwyKXjTmKqW4Eu5mRYwe1VeROVPm2xM"
+
+{
+  "userid": "5",
+  "listId": "8"
+}
+
+###
+POST  http://localhost:3000/profile/removefavorite
+Content-Type: application/json
+Authorization: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjUsImV4cGlyZSI6MTYxMjU1MDk3MiwiaWF0IjoxNjExNjg2OTcyfQ.L9HmDuqUn2rFbwyKXjTmKqW4Eu5mRYwe1VeROVPm2xM"
+
+{
+  "userid": "5"
+}
+
+
+###
+POST  http://localhost:3000/profile/search
+Content-Type: application/json
+Authorization: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjUsImV4cGlyZSI6MTYxMjU1MDk3MiwiaWF0IjoxNjExNjg2OTcyfQ.L9HmDuqUn2rFbwyKXjTmKqW4Eu5mRYwe1VeROVPm2xM"
+
+{
+  "userid": "5",
+  "searchText": "mi Lista"
+}
+
+
+###
+POST  http://localhost:3000/profile/getsearchedlist
+Content-Type: application/json
+Authorization: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjUsImV4cGlyZSI6MTYxMjU1MDk3MiwiaWF0IjoxNjExNjg2OTcyfQ.L9HmDuqUn2rFbwyKXjTmKqW4Eu5mRYwe1VeROVPm2xM"
+
+{
+  "userid": "5",
+  "listId": 5
+}
+
+

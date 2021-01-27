@@ -11,6 +11,7 @@ const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
 const productsRouter = require('./routes/products');
 const listsRouter = require('./routes/lists');
+const profileRouter = require('./routes/profile');
 
 
 const { checkToken } = require('./routes/middelware');
@@ -32,6 +33,7 @@ app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/products', productsRouter);
 app.use('/lists', checkToken, listsRouter);
+app.use('/profile', checkToken, profileRouter)
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

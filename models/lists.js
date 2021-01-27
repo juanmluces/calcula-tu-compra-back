@@ -28,4 +28,45 @@ const getLastList = (userId) => {
   })
 }
 
-module.exports = { createNewList, getLastList }
+const getFavoriteList = (userId) => {
+  return new Promise((resolve, reject) => {
+    db.query('SELECT * FROM lists WHERE fk_user = ? AND favorite = 1', [userId], (error, rows) => {
+      if (error) reject(error);
+      if (rows.length === 0) resolve(null);
+      resolve(rows[0]);
+    })
+  })
+}
+
+const createFavoriteList = (userId, listId) => {
+  return new Promise(async (resolve, reject) => {
+    const result1 = await removeFavoriteList(userId);
+    db.query('UPDATE lists SET favorite = 1 WHERE fk_user = ? AND id = ?', [userId, listId], (error, result) => {
+      if (error) reject(error)
+      resolve(result)
+
+    })
+
+
+  })
+}
+
+const removeFavoriteList = (userId) => {
+  return new Promise((resolve, reject) => {
+    db.query('UPDATE lists SET favorite = 0 WHERE fk_user = ?', [userId], (error, result) => {
+      if (error) reject(error);
+      resolve(result)
+    })
+  })
+}
+
+const getListsByNameSearch = (userId, searchInput) => {
+  return new Promise((resolve, reject) => {
+    db.query('SELECT * FROM lists WHERE fk_user = ? AND titulo LIKE ?', [userId, `%${searchInput}%`], (error, rows) => {
+      if (error) reject(error);
+      resolve(rows)
+    })
+  })
+}
+
+module.exports = { getListsByNameSearch, createNewList, getLastList, getFavoriteList, createFavoriteList, removeFavoriteList }

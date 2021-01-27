@@ -81,11 +81,24 @@ const getProductsContainsNameByPage = (pName, pPage) => {
 }
 
 const getAllProductsOfList = (pListId) => {
+  const products = [];
   return new Promise((resolve, reject) => {
-    db.query('SELECT fk_product as product_id FROM tbi_list_product WHERE fk_list = ?', [pListId], (err, rows) => {
-      if (err) reject(err);
-      resolve(rows)
-    })
+    db.query('SELECT fk_product as product_id FROM tbi_list_product WHERE fk_list = ?', [pListId],
+      async (err, rows) => {
+        if (err) reject(err);
+        const productsIds = rows;
+        for (let productObj of productsIds) {
+          const product = await getProductById(productObj.product_id);
+          product.cantidad = 1;
+          const repetido = products.find(prod => prod.id === product.id);
+          if (repetido) {
+            repetido.cantidad += 1;
+          } else {
+            products.push(product)
+          }
+        }
+        resolve(products)
+      })
   })
 }
 
