@@ -29,13 +29,13 @@ const getCategoryById = (pId) => {
 }
 
 const getAllProductsByPage = (pPage) => {
-  const offset = ((50 * pPage) - 50);
+  const offset = ((20 * pPage) - 20);
   let maxPages;
   return new Promise((resolve, reject) => {
     db.query('SELECT * from products', (err, rows) => {
       if (err) reject(err);
-      maxPages = Math.ceil(rows.length / 50);
-      db.query('SELECT * from products limit 50 offset ?', [offset], (err, rows) => {
+      maxPages = Math.ceil(rows.length / 20);
+      db.query('SELECT * from products limit 20 offset ?', [offset], (err, rows) => {
         if (err) reject(err);
         const result = { products: rows, maxPages }
         resolve(result)
@@ -47,13 +47,13 @@ const getAllProductsByPage = (pPage) => {
 }
 
 const getAllProductsByCategoryByPage = (pCategoryId, pPage) => {
-  const offset = ((50 * pPage) - 50);
+  const offset = ((20 * pPage) - 20);
   let maxPages;
   return new Promise((resolve, reject) => {
     db.query('SELECT * from products where fk_categoria = ? ', [pCategoryId], (err, rows) => {
       if (err) reject(err);
-      maxPages = Math.ceil(rows.length / 50);
-      db.query('SELECT * from products where fk_categoria = ? limit 50 offset ?', [pCategoryId, offset], (err, rows) => {
+      maxPages = Math.ceil(rows.length / 20);
+      db.query('SELECT * from products where fk_categoria = ? limit 20 offset ?', [pCategoryId, offset], (err, rows) => {
         if (err) reject(err);
         const result = { products: rows, maxPages };
         resolve(result)
@@ -64,14 +64,14 @@ const getAllProductsByCategoryByPage = (pCategoryId, pPage) => {
 
 
 const getProductsContainsNameByPage = (pName, pPage) => {
-  const offset = ((50 * pPage) - 50);
+  const offset = ((20 * pPage) - 20);
   let maxPages;
   return new Promise((resolve, reject) => {
     db.query('SELECT * FROM products WHERE nombre LIKE ? OR marca LIKE ?', [`%${pName}%`, `%${pName}%`], (err, rows) => {
       if (err) reject(err);
-      maxPages = Math.ceil(rows.length / 50);
+      maxPages = Math.ceil(rows.length / 20);
 
-      db.query('SELECT * FROM products WHERE nombre LIKE ? OR marca LIKE ? Limit 50 offset ?', [`%${pName}%`, `%${pName}%`, offset], (err, rows) => {
+      db.query('SELECT * FROM products WHERE nombre LIKE ? OR marca LIKE ? Limit 20 offset ?', [`%${pName}%`, `%${pName}%`, offset], (err, rows) => {
         if (err) reject(err);
         const result = { products: rows, maxPages }
         resolve(result);
