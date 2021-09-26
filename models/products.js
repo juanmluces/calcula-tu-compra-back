@@ -34,16 +34,14 @@ const getAllProductsByPage = (pPage) => {
   return new Promise((resolve, reject) => {
     db.query('SELECT * from products', (err, rows) => {
       if (err) reject(err);
-      if(!rows){ resolve(null)}else{
-
-        maxPages = Math.ceil(rows.length / 20);
-        db.query('SELECT * from products limit 20 offset ?', [offset], (err, rows) => {
-          if (err) reject(err);
-          const result = { products: rows, maxPages }
-          resolve(result)
-        })
-      }
-      });
+      if(rows == undefined) rows = []
+      maxPages = Math.ceil(rows.length / 20);
+      db.query('SELECT * from products limit 20 offset ?', [offset], (err, rows) => {
+        if (err) reject(err);
+        const result = { products: rows, maxPages }
+        resolve(result)
+      })
+    });
 
 
   })
@@ -55,6 +53,7 @@ const getAllProductsByCategoryByPage = (pCategoryId, pPage) => {
   return new Promise((resolve, reject) => {
     db.query('SELECT * from products where fk_categoria = ? ', [pCategoryId], (err, rows) => {
       if (err) reject(err);
+      if(rows == undefined) rows = []
       maxPages = Math.ceil(rows.length / 20);
       db.query('SELECT * from products where fk_categoria = ? limit 20 offset ?', [pCategoryId, offset], (err, rows) => {
         if (err) reject(err);
@@ -72,6 +71,7 @@ const getProductsContainsNameByPage = (pName, pPage) => {
   return new Promise((resolve, reject) => {
     db.query('SELECT * FROM products WHERE nombre LIKE ? OR marca LIKE ?', [`%${pName}%`, `%${pName}%`], (err, rows) => {
       if (err) reject(err);
+      if(rows == undefined) rows = []
       maxPages = Math.ceil(rows.length / 20);
 
       db.query('SELECT * FROM products WHERE nombre LIKE ? OR marca LIKE ? Limit 20 offset ?', [`%${pName}%`, `%${pName}%`, offset], (err, rows) => {
