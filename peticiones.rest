@@ -1,4 +1,4 @@
-POST http://localhost:3000/users/login
+POST https://new-calcula-tu-compra.herokuapp.com/users/login
 Content-Type: application/json
 
 {
@@ -17,7 +17,7 @@ Content-Type: application/json
 }
 
 ### 
-GET http://localhost:3000/products/categories
+GET https://new-calcula-tu-compra.herokuapp.com/products/categories
 
 
 ### 
@@ -46,7 +46,7 @@ Authorization: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjUsImV4cGlyZSI
 
 
 ###
-POST http://localhost:3000/lists/last
+POST https://new-calcula-tu-compra.herokuapp.com/lists/last
 Content-Type: application/json
 Authorization:"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjUsImV4cGlyZSI6MTYxMjU0MTYyNywiaWF0IjoxNjExNjc3NjI3fQ.Q9HlDxvd8EOmxQ7xRrV7XGvg7DDfmJpLgha0IHsoVl0"
 
