@@ -34,14 +34,16 @@ const getAllProductsByPage = (pPage) => {
   return new Promise((resolve, reject) => {
     db.query('SELECT * from products', (err, rows) => {
       if (err) reject(err);
-      if(!rows) resolve(null)
-      maxPages = Math.ceil(rows.length / 20);
-      db.query('SELECT * from products limit 20 offset ?', [offset], (err, rows) => {
-        if (err) reject(err);
-        const result = { products: rows, maxPages }
-        resolve(result)
-      })
-    });
+      if(!rows){ resolve(null)}else{
+
+        maxPages = Math.ceil(rows.length / 20);
+        db.query('SELECT * from products limit 20 offset ?', [offset], (err, rows) => {
+          if (err) reject(err);
+          const result = { products: rows, maxPages }
+          resolve(result)
+        })
+      }
+      });
 
 
   })
