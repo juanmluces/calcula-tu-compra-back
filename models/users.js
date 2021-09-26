@@ -14,6 +14,7 @@ const getUserByUsername = (pUsername) => {
     db.query('SELECT * from users where user = ?', [pUsername], (err, rows) => {
       console.log({rows});
       if (err) reject(err);
+      if(rows == undefined) resolve(null)
       if (rows == undefined || rows.length === 0) resolve(null);
       resolve(rows[0]);
     })
