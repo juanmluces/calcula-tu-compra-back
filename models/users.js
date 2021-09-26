@@ -12,8 +12,9 @@ const getUserById = (pId) => {
 const getUserByUsername = (pUsername) => {
   return new Promise((resolve, reject) => {
     db.query('SELECT * from users where user = ?', [pUsername], (err, rows) => {
+      console.log({rows});
       if (err) reject(err);
-      if (!rows || rows.length === 0) resolve(null);
+      if (rows == undefined || rows.length === 0) resolve(null);
       resolve(rows[0]);
     })
   })
