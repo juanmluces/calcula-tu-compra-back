@@ -22,7 +22,7 @@ const getLastList = (userId) => {
   return new Promise((resolve, reject) => {
     db.query('SELECT * FROM lists WHERE fk_user = ?', [userId], (error, rows) => {
       if (error) reject(error);
-      if (rows.length === 0) resolve(null);
+      if (rows && rows.length === 0) resolve(null);
       resolve(rows[rows.length - 1]);
     })
   })
@@ -32,7 +32,7 @@ const getFavoriteList = (userId) => {
   return new Promise((resolve, reject) => {
     db.query('SELECT * FROM lists WHERE fk_user = ? AND favorite = 1', [userId], (error, rows) => {
       if (error) reject(error);
-      if (rows.length === 0) resolve(null);
+      if (rows && rows.length === 0) resolve(null);
       resolve(rows[0]);
     })
   })
@@ -73,7 +73,7 @@ const getListsInDates = (pUserId, pDateFrom, pDateTo) => {
   return new Promise((resolve, reject) => {
     db.query('SELECT * FROM lists WHERE fk_user = ? AND fecha BETWEEN ? AND ?', [pUserId, pDateFrom, pDateTo], (error, rows) => {
       if (error) reject(error)
-      if (rows.length === 0) resolve(null);
+      if (rows && rows.length === 0) resolve(null);
       resolve(rows)
     })
   })
