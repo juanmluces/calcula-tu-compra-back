@@ -71,13 +71,8 @@ const getProductsContainsNameByPage = (pName, pPage) => {
   return new Promise((resolve, reject) => {
     db.query('SELECT * FROM products WHERE nombre LIKE ? OR marca LIKE ?', [`%${pName}%`, `%${pName}%`], (err, rows) => {
       if (err) reject(err);
-<<<<<<< HEAD
       const length = rows ? rows.length : 0
       maxPages = Math.ceil(length / 20);
-=======
-      if(rows == undefined) rows = []
-      maxPages = Math.ceil(rows.length / 20);
->>>>>>> cb4908c6b19f6fb943f296418fccd373cf5cac90
 
       db.query('SELECT * FROM products WHERE nombre LIKE ? OR marca LIKE ? Limit 20 offset ?', [`%${pName}%`, `%${pName}%`, offset], (err, rows) => {
         if (err) reject(err);
