@@ -1,0 +1,27 @@
+services:
+  app:
+    build: .
+    ports:
+      - 3001:3000
+    command: npm start
+    environment:
+      DB_HOST: "db"
+      DB_NAME: "calculatucompra"
+      DB_USER: "${DB_USER}"
+      DB_PASSWORD: "${DB_PASSWORD}"
+      TOKEN_EXPIRE: "10"
+      SECRET_KEY: "en una galaxia muy lejana"
+      MIDDELWARE_ACTIVE: "ON"
+    depends_on:
+      - db
+  db:
+    image: mysql:8.0
+    environment:
+      - MYSQL_RANDOM_ROOT_PASSWORD=yes
+      - MYSQL_DATABASE=calculatucompra
+      - MYSQL_USER=${DB_USER}
+      - MYSQL_PASSWORD=${DB_PASSWORD}
+    volumes:
+      - ./db/init.sql:/docker-entrypoint-initdb.d/init.sql
+    ports:
+      - 3307:3306
