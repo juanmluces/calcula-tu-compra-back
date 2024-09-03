@@ -12,6 +12,7 @@ services:
       TOKEN_EXPIRE: "10"
       SECRET_KEY: "en una galaxia muy lejana"
       MIDDELWARE_ACTIVE: "ON"
+    restart: always
     depends_on:
       - db
   db:
